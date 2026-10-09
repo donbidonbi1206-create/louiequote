@@ -120,4 +120,72 @@
       "https://30mins.notion.site/image/attachment%3Ac07d635e-073b-4355-aada-3af757704be3%3A%E6%9C%AA%E5%91%BD%E5%90%8D%E7%9A%84%E4%BD%9C%E5%93%81_3_(6).png?table=block&id=3ef4455a-9efb-80db-a925-fbeaf50b5dd1&spaceId=9b94455a-9efb-8188-a968-00031966add7&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
       "https://30mins.notion.site/image/attachment%3A9abf578e-c864-4d38-b3bb-a331778657ff%3A%E6%9C%AA%E5%91%BD%E5%90%8D%E7%9A%84%E4%BD%9C%E5%93%81_3_(7).png?table=block&id=3ef4455a-9efb-80db-81cc-e04f6f5f05b7&spaceId=9b94455a-9efb-8188-a968-00031966add7&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
       "https://30mins.notion.site/image/attachment%3Afcbb0d6d-2151-4c82-a92e-b06d7f01bc23%3A%E6%9C%AA%E5%91%BD%E5%90%8D%E7%9A%84%E4%BD%9C%E5%93%81_3_(8).png?table=block&id=3ef4455a-9efb-8090-8f86-fd16c65298ca&spaceId=9b94455a-9efb-8188-a968-00031966add7&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
-      "
+      "https://30mins.notion.site/image/attachment%3A0f00002f-09a8-4e70-9d66-ea1ff36f1706%3A%E6%9C%AA%E5%91%BD%E5%90%8D%E7%9A%84%E4%BD%9C%E5%93%81_3_(9).png?table=block&id=3ef4455a-9efb-8090-ae6f-e837cc14d4c5&spaceId=9b94455a-9efb-8188-a968-00031966add7&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
+      "https://30mins.notion.site/image/attachment%3A16468bfe-9dc5-4fbc-8aae-894944bb7eac%3A%E6%9C%AA%E5%91%BD%E5%90%8D%E7%9A%84%E4%BD%9C%E5%93%81_3_(10).png?table=block&id=3ef4455a-9efb-800d-bc73-e4e405d6157f&spaceId=9b94455a-9efb-8188-a968-00031966add7&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl"
+    ];
+
+    const quotes = [
+      "「噢，我那打結的尾巴！瘋得要冒煙啦！」",
+      "「人類！！你——你莫非是瘋了不成？！」",
+      "「啊啊啊！牠們要追上來了啦！要追上來了啊啊啊！」",
+      "「我的尾巴！天哪，我的尾巴要斷啦——！」",
+      "「起司……這、這玩意兒真的安全嗎？」",
+      "「救命！我要摔個四腳朝天啦——！」",
+      "「切克斯！切克斯快救我！薇薇在咬我的手指頭啦！」",
+      "「希希希……啊，真是對不起……可這真的太太好笑了！」",
+      "「好吧！我承認——我高興得尾巴都往外長長了一公分！」",
+      "「我對尾巴發誓，我再也——再也不要陪你玩這種瘋狂遊戲了！」",
+      "「……除非你拿一個香噴噴的杯子蛋糕來跟我交換！」",
+      "「起司、起司！這次的蛋糕嚐起來味道怎麼樣？」",
+      "「偶爾嚐上一口甜滋滋的小點心，感覺倒也不賴嘛！」",
+      "「切克斯……，你簡直是個超級大天才！」",
+      "「嘿嘿……不好意思啦，我不過是一頭惡魔罷了！起司，咱們走囉！」",
+      "「……奇怪，人類為什麼會凍得瑟瑟發抖？」",
+      "「起司，等我將來長出了大翅膀，就帶你回地獄瞧瞧——那兒保證暖洋洋的，舒服極了！」",
+      "「切克斯！今天咱們又要去哪裡冒險呢？」"
+    ];
+
+    // 自動預載入所有圖片，防止閃爍
+    window.onload = function() {
+      images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+
+    let lastImgIndex = 0;
+    let lastQuoteIndex = -1;
+
+    function randomizeAll() {
+      const charEl = document.getElementById("character");
+      const quoteEl = document.getElementById("quote");
+
+      // 觸發對話框淡出與圖片彈跳
+      quoteEl.classList.add("fade");
+      charEl.classList.remove("pop");
+      void charEl.offsetWidth; // 強制重繪以重置 CSS 動畫
+      charEl.classList.add("pop");
+
+      let newImgIndex;
+      let newQuoteIndex;
+
+      do {
+        newImgIndex = Math.floor(Math.random() * images.length);
+      } while (newImgIndex === lastImgIndex && images.length > 1);
+
+      do {
+        newQuoteIndex = Math.floor(Math.random() * quotes.length);
+      } while (newQuoteIndex === lastQuoteIndex && quotes.length > 1);
+
+      lastImgIndex = newImgIndex;
+      lastQuoteIndex = newQuoteIndex;
+
+      setTimeout(() => {
+        charEl.src = images[newImgIndex];
+        quoteEl.innerText = quotes[newQuoteIndex];
+        quoteEl.classList.remove("fade");
+      }, 120);
+    }
+  </script>
+</body>
+</html>
